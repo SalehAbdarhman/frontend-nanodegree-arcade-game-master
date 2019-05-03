@@ -3,7 +3,7 @@
 ## Table of Contents
 
 - [project map](#projectmap)
-- [start the game] (#startTheGame)
+- [start the game](#startTheGame)
 
 
 ## projectmap
