@@ -3,9 +3,6 @@ let numColums = 5 ;
 let Start = 1 ;
 let End =3 ;
 let NumberOfEnemy = 4;
-let moveX =2;
-let moveY =5 ;
-controlPress = 0 ; 
 function getRows(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -40,11 +37,10 @@ Enemy.prototype.update = function(dt) {
     }
 
 // when player tocuch the enemy 
-	if(this.y == moveY && moveX == Math.floor(this.x)) {
+	if(this.y == player.y && player.x == Math.floor(this.x)) {
 		player.x = 2;
         player.y = 5;
-		moveX=2;
-		moveY=5;
+
 	}
 };
 
@@ -62,6 +58,7 @@ let Player = function() {
     this.x = 2;
     this.y = 5;
     this.location = {x: 0, y: 0};
+
 };
 
 Player.prototype.moveLeft = function() {
@@ -102,6 +99,7 @@ Player.prototype.update = function() {
         
         this.x = 2;
         this.y = 5;
+
     }
 	
 	
@@ -115,28 +113,29 @@ Player.prototype.render = function() {
     
 };
 
-Player.prototype.handleInput = function(directionStr) {
+Player.prototype.handleInput = function(direction) {
     
-	if(controlPress === 1 ){
-	if (directionStr == 'left') {
-        this.moveLeft();
-		if(moveX != 0  ) moveX -- ;
+
+		
+	if (direction == 'left') {
+ 
+		this.moveLeft();
     }
-     if (directionStr == 'right') {
-        this.moveRight();
-		if(moveX != 4 ) moveX ++ ;
+     if (direction == 'right') {
+
+		this.moveRight();
     }
-     if (directionStr == 'up') {
-        this.moveUp();
-		if(moveY != 0 )moveY -- ;
+     if (direction == 'up') {
+
+		this.moveUp();
     }
-    if (directionStr == 'down'){
-        this.moveDown();
-		if(moveY != 5 ) moveY ++ ;
+    if (direction == 'down'){
+		this.moveDown();
+		
     }
-	controlPress = 0;
-	}
-	console.log("("+moveX+" , "+moveY+" )");
+	
+	
+	//console.log("("+this.x+" , "+this.y+")");
 };
 
 // Place all enemy objects in an array called allEnemies
@@ -164,6 +163,6 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
-controlPress=1;
+
     player.handleInput(allowedKeys[e.keyCode]);
 });
